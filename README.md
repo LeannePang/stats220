@@ -8,8 +8,8 @@
 * I am taking STATS 220 because my program suggests it to me.
 * I am interested in learning about everything.
 
-2. *Memes* that capture how I currently feel about my university studies are
+2. **Memes** that capture how I currently feel about my university studies are
 
-   | Meme 1 | Meme 2 |
+   | *Meme 1* | *Meme 2* |
    |---------|---------|
    ![](https://media.tenor.com/xafxUNhByM4AAAAM/kaito-data.gif) | ![](https://media.tenor.com/GHlFRgiXXdAAAAAj/school-college.gif) |
