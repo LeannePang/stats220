@@ -9,5 +9,7 @@
 * I am interested in learning about everything.
 
 2. *Memes* that capture how I currently feel about my university studies are
-   ![](https://media.tenor.com/xafxUNhByM4AAAAM/kaito-data.gif)
-   ![](https://media.tenor.com/GHlFRgiXXdAAAAAj/school-college.gif)
+
+   | Meme 1 | Meme 2 |
+   |---------|---------|
+   ![](https://media.tenor.com/xafxUNhByM4AAAAM/kaito-data.gif) | ![](https://media.tenor.com/GHlFRgiXXdAAAAAj/school-college.gif) |
