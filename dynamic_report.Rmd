@@ -1,0 +1,107 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  background-color:#F0F0F0;
+  font-family; Arial, sans-serif;
+  font-size: 20px;
+  line-height: 3
+}
+
+p {
+  color: #00008B;
+  font-size: 20px;
+  line-height: 1.5
+  }
+```
+
+## TradeMe Rental Listings Tracker for Auckland's North Shore
+
+This tracker records the rental listings of Auckland's North Shore on TradeMe, collecting data on weekly rent, property type, number of bedrooms, bathrooms, and parking spaces to provide a general view of the rental market in the North Shore. It specifically looks into the overall rent and the median rent by bedroom count and property type.
+
+```{r}
+library(tidyverse)
+
+# read file
+logged_data <- read.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTgUFRQ_Bx5MaYo2MDXQ_Q_P654WXfT5U4OSqDHknn9urqe2eXM003k3Br95va-Q6YP5l9rLVYAPAQa/pub?output=csv")
+
+# rename variables
+latest_data <- logged_data %>%
+  rename(type = 2,
+         rent = 3, 
+         bedroom = 4, 
+         bathroom = 5, 
+         parking = 6)
+
+# calculate rent statistic
+max_rent <- max(latest_data$rent,na.rm = TRUE)
+min_rent <- min(latest_data$rent, na.rm = TRUE)
+median_rent <- median(latest_data$rent, na.rm = TRUE)
+
+# create a new data frame called median_rent_data
+# calculate median rent of property with different bedrooms
+median_rent_data <- latest_data %>%
+  group_by(bedroom) %>%
+  summarise(median_rent = median(rent, na.rm = TRUE))
+
+# plot bar chart according to property types
+type_plot <- ggplot(latest_data, aes(x = type)) +
+  geom_bar(fill = "lightgreen") +
+  labs(title = "The type of Rental Property", 
+       caption = "Figure 1. Bar chart showing the type of rental property.",
+       x = "Rental type") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.caption = element_text(hjust = 0.5, size = 10, face = "bold")) +
+  scale_y_continuous(expand = c(0, 0))
+
+
+# plot bar chart according to median rent and bedrooms
+median_rent_plot <- ggplot(median_rent_data, aes(x = factor(bedroom), y = median_rent)) +
+  geom_bar(stat = "identity", fill = "pink") +
+  labs(title = "Median Rent by Number of Bedrooms",
+       caption = "Figure 2. Bar chart showing the median weekly rent according to the number of bedrooms.",
+       x = "Number of Bedrooms",
+       y = "Median Rent ($/week)") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.caption = element_text(hjust = 0.5, size = 10, face = "bold")) +
+  scale_y_continuous(expand = c(0, 0))
+
+
+# plot scatter plot according to rent and bedrooms
+rent_plot <- ggplot(latest_data, aes(x = bedroom, y = rent)) + 
+  geom_point(alpha = 0.7, color = "blue", shape = 23, size = 3) +
+  labs(title = "Rent vs.Number of Bedrooms", 
+       caption = "Figure 3. Scatter plot showing the relationship between the number of bedrooms and weekly rent.",
+       x = "Number of Bedrooms",
+       y = "Rent ($/week)") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.caption = element_text(hjust = 0.5, size = 10, face = "bold"))
+```
+
+The highest weekly rent in Auckland's North Shore is $`r max_rent`, the lowest is $`r min_rent`, and the median is $`r median_rent`.
+
+The type of rental property in Auckland's North Shore:
+
+```{r, echo=FALSE}
+type_plot 
+```
+
+The median rent of property with different bedrooms:
+
+```{r, echo=FALSE}
+median_rent_plot
+```
+
+The rent of property with different bedrooms:
+
+```{r, echo=FALSE}
+rent_plot
+```
