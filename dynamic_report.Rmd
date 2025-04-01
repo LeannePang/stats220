@@ -86,7 +86,7 @@ rent_plot <- ggplot(latest_data, aes(x = bedroom, y = rent)) +
         plot.caption = element_text(hjust = 0.5, size = 10, face = "bold"))
 ```
 
-The highest weekly rent in Auckland's North Shore is $`r max_rent`, the lowest is $`r min_rent`, and the median is $`r median_rent`.
+***The highest weekly rent in Auckland's North Shore is $`r max_rent`, the lowest is $`r min_rent`, and the median is $`r median_rent`.***
 
 The type of rental property in Auckland's North Shore:
 
