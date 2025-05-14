@@ -1,0 +1,77 @@
+---
+title: "The North Shore Rental Market Exploration" 
+output: html_document
+---
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{js}
+$(function() {
+  $(".level2").css('visibility', 'hidden');
+  $(".level2").first().css('visibility', 'visible');
+  $(".container-fluid").height($(".container-fluid").height() + 300);
+  $(window).on('scroll', function() {
+    $('h2').each(function() {
+      var h2Top = $(this).offset().top - $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (h2Top >= 0 && h2Top <= windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'visible');
+      } else if (h2Top > windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'hidden');
+      }
+    });
+  });
+})
+```
+
+```{css}
+.figcaption {display: none}
+
+h1{color: white;}
+
+h2{ 
+color: white;
+margin-top: 60px;
+margin-bottom: 20px;
+}
+
+body {
+  background-color: black;
+  font-family; "Comic Sans MS";
+  font-size: 20px;
+  line-height: 4
+}
+
+p {
+  color: white;
+  font-size: 20px;
+  line-height: 2;
+  margin-bottom: 40px;
+  }
+  
+```
+## Seasonal Rental Patterns
+
+Figure 1 shows the weekly rent distribution over time according to the number of bedrooms from late March to mid May 2025. I excluded some outliers that have weekly rent over $1500 for better visualization. The weekly rent range of two-bedroom and five-bedrooms rental are similar. The highest weekly rent for three-bedroom rental dropped from around $1300 to $800, while the lowest weekly rent for four-bedroom rentals rose from around $700 to $900.
+
+![A scatter plot showing weekly rent over time](plot1.png)
+
+## Distribution of Property Types
+
+Figure 2 shows the distribution of property types in North Shore. Houses clearly dominate the market, with at least 60 properties. Units represent the second most common property type, while townhouses and apartments are much less common in the area.
+
+![A text plot showing distribution of propery types](plot2.gif)
+
+## Rental Price Correlation with Number of Bedroom and Property Type
+
+The price different becomes pronounced as the number of bedrooms increases across property types. Prices also vary between different types of properties with the same number of bedrooms. For example, rental prices for units are the lowest among all property types, while townhouses have the highest rental prices.
+
+![A line plot showing relationship between median rental price, number of bedrooms and property types](plot3.png)
+
+
+
+
